@@ -1,0 +1,188 @@
+.show_detail{
+    position: absolute;
+    left: 235px;
+    top: 50px;
+}
+#detail_right {
+    left: auto;
+    right: 235px;
+}
+/*第一个表*/
+.show_detail .one_table .card{
+    background: #485164;
+}
+.show_detail .one_table .content_header{
+    text-align: center;
+    background: #DD603B;
+    color: #fff;
+    line-height: 36px;
+}
+.show_detail .one_table .content{
+    padding: 1px;
+}
+.show_detail .one_table button{
+    width: 32.9%;
+    padding: 8px;
+    margin-bottom: 1px;
+    margin-right: 1px;
+    border-radius: 0;
+    background: #323946;
+    color: #fff;
+}
+.show_detail .one_table button:hover{
+    background: #DD603B;
+    color: #fff;
+}
+.show_detail .one_table button span:nth-of-type(1){
+    font-size: 18px;
+    font-weight: bolder;
+}
+.show_detail .one_table button span:nth-of-type(2){
+    font-size: 14px;
+    font-weight: 100;
+}
+.show_detail .one_table button p{
+    font-size: 12px;
+    font-weight: 100;
+}
+/*第二个表*/
+.show_detail .two_table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.show_detail .two_table .card{
+    background: #485164;
+    color: #fff;
+}
+.show_detail .two_table .content{
+    padding: 1px;
+}
+.show_detail .two_table .content div{
+    line-height: 36px;
+}
+.show_detail .two_table .content div:nth-of-type(1){
+    border-bottom: 1px solid #A4A8B2;
+}
+.show_detail .two_table .content div span{
+    display: inline-block;
+    text-align: center;
+}
+.show_detail .two_table .content div span:nth-of-type(1){
+    border-right: 1px solid #A4A8B2;
+    line-height: 20px;
+    width: 66.666%;
+}
+.show_detail .two_table .content div span:nth-of-type(2){
+    width: 30%;
+}
+/*第三个表*/
+.show_detail .three_table{
+    margin-bottom: 10px;
+}
+.show_detail .three_table .card{
+    background: #485164;
+    color: #fff;
+    height: 500px;
+}
+.show_detail .three_table .content_header{
+    text-align: center;
+    color: #fff;
+    line-height: 54px;
+}
+.show_detail .three_table input{
+    border: none;
+    outline:medium;
+    width: 94%;
+    height: 36px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    padding-left: 10px;
+    background: #323946;
+    line-height: 54px;
+}
+.three_table input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #fff;
+}
+.show_detail .three_table .content{
+    padding: 1px;
+}
+.show_detail .three_table .content div{
+    line-height: 36px;
+}
+.show_detail .three_table .content div{
+    border-bottom: 1px solid #A4A8B2;
+}
+.show_detail .three_table .content div:nth-of-type(1){
+    border-bottom: 1px solid #A4A8B2;
+    background: #323946;
+}
+.show_detail .three_table .content div span{
+    display: inline-block;
+    text-align: center;
+}
+.show_detail .three_table .content div span:nth-of-type(1){
+    border-right: 1px solid #A4A8B2;
+    line-height: 20px;
+    width: 66.666%;
+}
+.show_detail .three_table .content div span:nth-of-type(2){
+    width: 30%;
+}
+.show_detail .static-btn{
+    background: #323946;
+    color: #fff;
+    font-weight: normal;
+}
+
+.show_detail .static-btn:hover{
+    background: #A4A8B2;    
+}
+
+.static_detail_left{
+    position: absolute;
+    display: none;
+    left: 545px;
+    top: 460px;
+    height: 400px;
+    right: 235px;
+    border-radius: 5px;
+    overflow-y: auto;
+    background: #485164;
+}
+.static_detail_right{
+    position: absolute;
+    display: none;
+    right: 545px;
+    top: 460px;
+    height: 400px;
+    left: 235px;
+    border-radius: 5px;
+    overflow-y: auto;
+    background: #485164;
+}
+
+.static_detail_left .echarts_view{
+    display: inline-block;
+    width: 335px;
+    height: 360px;
+    margin: 1.54%;
+    background: #b4d95c;
+}
+.static_detail_right .echarts_view{
+    display: inline-block;
+    width: 335px;
+    height: 360px;
+    margin: 1.54%;
+    background: #b4d95c;
+}
+/*广场分类的单独样式*/
+#list_left .three_table .content div span:nth-of-type(1){
+    border-right: 1px solid #A4A8B2;
+    line-height: 20px;
+    width: 55%;
+}
+#list_left .three_table .content div span:nth-of-type(2) {
+    width: 45%;
+}
+

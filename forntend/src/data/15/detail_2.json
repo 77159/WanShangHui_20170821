@@ -1,0 +1,137 @@
+{
+	"one_table": [{
+		"id": "1",
+		"number": "10",
+		"percentage": "5",
+		"class": "女性服饰",
+		"list": [{
+			"lon":111,
+			"lat":111,
+			"name":"test"
+		}]
+	}, {
+		"id": "2",
+		"number": "16",
+		"percentage": "5",
+		"class": "男性服饰",
+		"list": [{
+			"lon":222,
+			"lat":222,
+			"name":"test"
+		}]
+	}, {
+		"id": "3",
+		"number": "10",
+		"percentage": "5",
+		"class": "老人服饰",
+		"list": [{
+			"lon":333,
+			"lat":333,
+			"name":"test"
+		}]
+	}, {
+		"id": "4",
+		"number": "10",
+		"percentage": "5",
+		"class": "小孩服饰",
+		"list": [{
+			"lon":444,
+			"lat":444,
+			"name":"test"
+		}]
+	}, {
+		"id": "5",
+		"number": "16",
+		"percentage": "5",
+		"class": "大人服饰",
+		"list": [{
+			"lon":555,
+			"lat":555,
+			"name":"test"
+		}]
+	}, {
+		"id": "6",
+		"number": "10",
+		"percentage": "5",
+		"class": "运动休闲",
+		"list": [{
+			"lon":666,
+			"lat":666,
+			"name":"test"
+		}]
+	},  {
+		"id": "7",
+		"number": "10",
+		"percentage": "5",
+		"class": "清新脱俗",
+		"list": [{
+			"lon":777,
+			"lat":777,
+			"name":"test"
+		}]
+	}, {
+		"id": "8",
+		"number": "16",
+		"percentage": "5",
+		"class": "冬季畅销",
+		"list": [{
+			"lon":888,
+			"lat":888,
+			"name":"test"
+		}]
+	}, {
+		"id": "9",
+		"number": "16",
+		"percentage": "5",
+		"class": "其它服饰",
+		"list": [{
+			"lon":999,
+			"lat":999,
+			"name":"test"
+		}]
+	}],
+
+	"two_table": [{
+		"id": "9",
+		"total": "100",
+		"price": "350"
+	}],
+
+	"three_table": [{
+		"id": "10",
+		"name": "阿迪达斯",
+		"class": "运动",
+		"lon":101010,
+		"lat":101010
+	}, {
+		"id": "11",
+		"name": "李宁",
+		"class": "运动",
+		"lon":111111,
+		"lat":111111
+	}, {
+		"id": "12",
+		"name": "乔丹",
+		"class": "运动",
+		"lon":121212,
+		"lat":121212
+	}, {
+		"id": "13",
+		"name": "耐克",
+		"class": "运动",
+		"lon":131313,
+		"lat":131313
+	}, {
+		"id": "14",
+		"name": "面条",
+		"class": "主食",
+		"lon":141414,
+		"lat":141414
+	}, {
+		"id": "15",
+		"name": "米饭",
+		"class": "主食",
+		"lon":151515,
+		"lat":151515
+	}]
+}

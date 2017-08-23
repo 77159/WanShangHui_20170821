@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>万商会</title>
+    <!--CSS编写位置、引入方式，都写在build:css里面，打包时候合并-->
+    <link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">    
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/detail.css">
+    <!-- endbuild -->
+    <style>
+      @import url(earth/Build/Cesium/Widgets/widgets.css);
+      /* html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      } */
+  </style>
+</head>
+
+<body>
+    <!--中间地图模块-->
+    <div id="cesiumContainer" class="map-container"></div>
+    <!-- <div class="ui card total-menu" id="#totalMenu">
+    <div class="content color-graduation total-menu">
+        <img class="left floated mini ui image" src="/images/drink.png">
+        <div class="header">餐饮
+            <h3 class="right floated">100</h3>
+        </div>
+        <div class="ui fitted divider"></div>
+        <div class="description center aligned">生态占比20% </div>
+    </div>
+     </div> -->
+     <!--左侧模块-->
+    <div class="left-banner cardbanner" id="leftBanner">
+        <div class="ui one cards">
+            <!-- <div class="card">
+            <div class="content color-drink">
+                <img class="left floated mini ui image" src="/images/drink.png">
+                <div class="header">餐饮
+                    <h3 class="right floated">100</h3>
+                </div>
+                <div class="ui fitted divider"></div>
+                <div class="description center aligned">生态占比&nbsp;&nbsp;20%</div>
+            </div>
+        </div>-->
+        </div>
+    </div>
+    <!--右侧模块-->
+    <div class="right-banner cardbanner" id="rightBanner">
+        <div class="ui one cards">
+            <!-- <div class="card">
+            <div class="content color-graduation">
+                <img class="left floated mini ui image" src="/images/drink.png">
+                <div class="header">餐饮
+                    <h3 class="right floated">100</h3>
+                </div>
+                <div class="ui fitted divider"></div>
+                <div class="description center aligned">生态占比20% </div>
+            </div>
+        </div> -->
+        </div>
+    </div>
+    
+    <!--中间搜索模块-->
+    <div class="search-center">
+        <div class="ui action inverted input">
+            <input type="text" placeholder="请输入您想搜索的内容">
+            <button class="ui icon black-gray button">
+                <i class="search icon"></i>
+            </button>
+        </div>
+        <!--公里按钮组-->
+        <div class="ui black-gray buttons">
+            <button class="ui button active" data-mile='3'>3公里</button>
+            <button class="ui button" data-mile='5'>5公里</button>
+            <button class="ui button" data-mile='10'>10公里</button>
+            <button class="ui button" data-mile='15'>15公里</button>
+        </div>
+    </div>
+
+    <div class="show_detail transition hidden" id="list_left">
+        <!--表格3-->
+        <div class="three_table">
+            <div class="ui card">
+                <div class="content_header">
+                    <input type="text" placeholder="请输入要搜索的广场名称">
+                </div>
+                <div class="content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--左边详情列表-->
+    <div class="show_detail transition hidden" id="detail_left">
+        <!--表格1-->
+        <div class="one_table">
+            <div class="ui card">
+                <div class="content_header">
+                    <div class="header">全部细分业态</div>
+                </div>
+                <div class="content" id="one_table">
+                    <!--<button class="large ui button"><span>10</span><span>/5%</span>
+                    <p>地方风味</p></button>-->
+                </div>
+            </div>
+        </div>
+        <!--表格2-->
+        <div class="two_table">
+            <div class="ui card">
+                <div class="content" id="two_table">
+                    <!--<div>
+                    <span>数量合计</span>
+                    <span>10</span>
+                </div>
+                <div>
+                    <span>平均消费</span>
+                    <span>50</span>
+                </div>-->
+                </div>
+            </div>
+        </div>
+        <!--表格3-->
+        <div class="three_table">
+            <div class="ui card">
+                <div class="content_header">
+                    <input type="text" placeholder="请输入要搜索的品牌或店铺名称">
+                </div>
+                <div class="content" id="three_table">                    
+                    <!--<div>
+                    <span>麦当劳（五角店）</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>吉野家</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>永和大王</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>肯德基</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>黄焖鸡米饭</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>庆丰包子铺</span>
+                    <span>快餐</span>
+                </div>-->
+                </div>
+            </div>
+        </div>
+        <button id="toView" class="fluid ui button static-btn">查看统计图标</button>
+    </div>
+    <!--右边详情列表-->
+    <div class="show_detail transition hidden" id="detail_right">
+        <!--表格1-->
+        <div class="one_table">
+            <div class="ui card">
+                <div class="content_header">
+                    <div class="header">全部细分业态</div>
+                </div>
+                <div class="content" id="right_one_table">
+                    <!--<button class="large ui button"><span>10</span><span>/5%</span>
+                    <p>地方风味</p></button>-->
+                </div>
+            </div>
+        </div>
+        <!--表格2-->
+        <div class="two_table">
+            <div class="ui card">
+                <div class="content" id="right_two_table">
+                    <!--<div>
+                    <span>数量合计</span>
+                    <span>10</span>
+                </div>
+                <div>
+                    <span>平均消费</span>
+                    <span>50</span>
+                </div>-->
+                </div>
+            </div>
+        </div>
+        <!--表格3-->
+        <div class="three_table">
+            <div class="ui card">
+                <div class="content_header">
+                    <input type="text" placeholder="请输入要搜索的品牌或店铺名称">
+                </div>
+                <div class="content" id="right_three_table">
+                    <!--<div>
+                    <span>麦当劳（五角店）</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>吉野家</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>永和大王</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>肯德基</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>黄焖鸡米饭</span>
+                    <span>快餐</span>
+                </div>
+                <div>
+                    <span>庆丰包子铺</span>
+                    <span>快餐</span>
+                </div>-->
+                </div>
+            </div>
+        </div>
+        <button id="toViewRight" class="fluid ui button static-btn">查看统计图标</button>
+    </div>
+    <!--左边统计详情-->
+    <div class="static_detail_left">
+        <div class="echarts_view" id="left_echarts_one"></div>
+        <div class="echarts_view" id="left_echarts_two"></div>
+        <div class="echarts_view" id="left_echarts_three"></div>
+    </div>
+    <!--右边统计详情-->
+    <div class="static_detail_right">
+        <div class="echarts_view" id="right_echarts_one"></div>
+        <div class="echarts_view" id="right_echarts_two"></div>
+        <div class="echarts_view" id="right_echarts_three"></div>
+    </div>
+
+    <!--JS编写位置、引入方式-->
+    <script src="earth/Build/Cesium/Cesium.js"></script>
+    <script src="earth/tiles/tiles.js"></script>
+    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script src="libs/semantic/semantic.min.js"></script>
+    <script src="libs/mustache.js"></script>
+    <script src="libs/echarts.common.min.js"></script>
+    <script src="libs/lodash.min.js"></script>
+    <!-- build:js -->
+    <script src="js/main.js"></script>
+    <script src="js/temples.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/detail.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

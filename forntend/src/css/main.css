@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+}
+
+
+/*******************各个块块的颜色样式*****************/
+
+.ui.card .color-graduation {
+    background-color: rgba(72, 156, 226, 1);
+}
+
+.ui.cards .card .content.color-drink {
+    background-color: rgba(237, 105, 64, 1);
+}
+
+.ui.cards .card .content.color-cloth {
+    background-color: rgba(254, 181, 58, 1);
+}
+
+.ui.cards .card .content.color-live {
+    background-color: rgba(84, 199, 197, 1);
+}
+
+.ui.cards .card .content.color-coffee {
+    background-color: rgba(198, 166, 127, 1);
+}
+
+.ui.cards .card .content.color-children {
+    background-color: rgba(238, 113, 164, 1);
+}
+
+.ui.cards .card .content.color-graduation {
+    background-color: rgba(162, 100, 239, 1);
+}
+
+.ui.cards .card .content.color-shopping {
+    background-color: rgba(72, 156, 226, 1);
+}
+
+.ui.cards .card .content.color-traffic {
+    background-color: rgba(74, 166, 87, 1);
+}
+
+
+/********************************************/
+
+/******************通用metarialUi 样式(start) ******************************/
+.ui.black-gray.button:focus,
+.ui.black-gray.buttons .button:focus,
+.ui.black-gray.button:hover,
+.ui.black-gray.buttons .button:hover,
+.ui.black-gray.buttons .button.active {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-shadow: none;
+}
+
+.ui.black-gray.button,
+.ui.black-gray.buttons .button {
+    background-color: rgba(50, 57, 70, 1);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: normal;
+    text-shadow: none;
+    background-image: none;
+}
+
+.ui.black-gray.buttons .button:not(:last-child) {
+    border-right: 1px solid rgba(160, 158, 158, 0.4);
+}
+
+.ui.card>.content, .ui.cards>.card>.content {
+    padding: 1.02em 1em;
+}
+
+.ui.cards .card .content .header {
+    color: #ffffff;
+}
+
+.ui.cards .card .content img {
+    width: 16px;
+    height: 16px;
+}
+
+/******************通用metarialUi 样式（end）******************************/
+
+.map-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f0f4f4;
+}
+
+#totalMenu {
+    width: 200px;
+    height: 88px;
+    position: absolute;
+    top: 50px;
+    left: 15px;
+}
+
+.cardbanner {
+    width: 200px;
+    position: absolute;
+    height: auto;
+}
+
+#leftBanner {
+    top: 50px;
+    left: 15px;
+}
+
+#rightBanner {
+    top: 50px;
+    right: 15px;
+}
+
+.ui.cards {
+    margin: 0;
+    height: 0;
+}
+
+.ui.cards .card {
+    width: 200px;
+    height: 88px;
+    margin: 0 0 10px 0;
+    cursor: pointer;
+}
+
+.ui.cards .card .content .header {
+    width: 170px;
+    letter-spacing: 1px;
+}
+
+.ui.cards .card .content .ui.divider {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-top: none;
+}
+
+.ui.cards .card .content .description {
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.ui.cards .card .content .header h3 {
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.search-center {
+    position: absolute;
+    top: 25px;
+    width: 700px;
+    left: calc(50% - 350px);
+    /* border: 1px solid red; */
+}
+
+.search-center .ui.input {    
+    height: 36px;
+}
+
+.search-center .ui.input input {
+    width: 246px;
+}
+
+.search-center .ui.input .ui.button {
+    width: 80px;
+}
+
+.search-center .ui.input .ui.button i {
+    font-size: 1.4rem;
+    padding-left: 20px;
+}   
+
+.search-center .ui.buttons {
+    margin-left: 15px;
+}
+
+.search-center .ui.buttons .button {
+    width: 88px;
+}
+
+#list_left  .ui.card  .content .list-tr{
+    cursor: pointer;
+}
+
+/*地图控件样式*/
+.search-results,
+.cesium-baseLayerPicker-dropDown,
+.cesium-navigation-help {
+    z-index: 9;
+}
+.cesium-viewer-toolbar .cesium-sceneModePicker-wrapper{
+    z-index: 9;
+}
