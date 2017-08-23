@@ -28,24 +28,27 @@ function initMenus() {
 }
 
 /******************************** todo **************************************/
-function initTable(id, parentDiv) {
+function initTable(id, parentDiv, type) {
 	var fileName = 'detail_' + (id - 1) + '.json';
 	var url = 'data/' + curMile + '/' + fileName;
+	var index = 0;
 	$.getJSON(url, function(result) {
-		initTableOneHtml(result, $('#one_table'));
-		initTableTwoHtml(result, $('#two_table'));
-		initTableThreeHtml(result, $('#three_table'));
-		initTableOneHtmlRight(result, $('#right_one_table'));
-		initTableTwoHtmlRight(result, $('#right_two_table'));
-		initTableThreeHtmlRight(result, $('#right_three_table'));
-		inputEvent(result, $('#detail_left .three_table input'), $('#three_table'));
-		inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'));
-		clickOneTable(result);
-		clickThreeTable(result);
+		if(type === 'left'){
+            initTableOneHtml(result, $('#one_table'));
+            initTableTwoHtml(result, $('#two_table'));
+            initTableThreeHtml(result, $('#three_table'));
+            clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'));
+            inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+		}else {
+            initTableOneHtmlRight(result, $('#right_one_table'));
+            initTableTwoHtmlRight(result, $('#right_two_table'));
+            initTableThreeHtmlRight(result, $('#right_three_table'));
+            clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'));
+            inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
+		}
 	});
 }
 /******************************** todo **************************************/
-
 
 
 function initBannerHtml(data, parentDiv) {
@@ -64,6 +67,7 @@ function initTableOneHtml(data, parentDiv) {
 	Mustache.parse(templ); // optional, speeds up future uses
 	var tableOneHTML = Mustache.render(templ, data);
 	parentDiv.empty().append(tableOneHTML);
+    $('#detail_left .one_table .button1').addClass('active');//默认第一个选中
 }
 
 function initTableTwoHtml(data, parentDiv) {
@@ -76,7 +80,7 @@ function initTableTwoHtml(data, parentDiv) {
 function initTableThreeHtml(data, parentDiv) {
 	var templ = getTableThree();
 	Mustache.parse(templ); // optional, speeds up future uses
-	var tableThreeHTML = Mustache.render(templ, data);
+	var tableThreeHTML = Mustache.render(templ, data.one_table[0]);
 	parentDiv.empty().append(tableThreeHTML);
 }
 /***** todo ******/
@@ -85,6 +89,7 @@ function initTableOneHtmlRight(data, parentDiv) {
 	Mustache.parse(templ); // optional, speeds up future uses
 	var tableOneHTMLRight = Mustache.render(templ, data);
 	parentDiv.empty().append(tableOneHTMLRight);
+    $('#detail_right .one_table .button1').addClass('active');//默认第一个选中
 }
 
 function initTableTwoHtmlRight(data, parentDiv) {
@@ -97,7 +102,7 @@ function initTableTwoHtmlRight(data, parentDiv) {
 function initTableThreeHtmlRight(data, parentDiv) {
 	var templ = getTableThreeRight();
 	Mustache.parse(templ); // optional, speeds up future uses
-	var tableThreeHTMLRight = Mustache.render(templ, data);
+	var tableThreeHTMLRight = Mustache.render(templ, data.one_table[0]);
 	parentDiv.empty().append(tableThreeHTMLRight);
 }
 /******************************** todo **************************************/
@@ -137,7 +142,7 @@ function bindBannerCardEvent() {
  */
 function showDetailsPanel(id, type) {
 	//渲染表格数据
-	initTable(parseInt(id), $('#detail_' + type));
+	initTable(parseInt(id), $('#detail_' + type), type);
 
 	fadePanel($('.static_detail_left'), 'fade'); //隐藏统计列表面板
 	fadePanel($('.static_detail_right'), 'fade'); //隐藏统计列表面板
@@ -189,34 +194,6 @@ function bindMilesButtonEvent() {
 }
 
 
-/******************************** todo **************************************/
-//监测键盘输入内容时搜素
-function inputEvent(result, $eles, $ele) {
-	$eles.on('keyup', function() {
-		var value = $(this).val();
-		var dataList = result.three_table;
-		var filterData = [];
-		if (value.trim() !== '') {
-			filterData = _.filter(dataList, (item) => {
-				for (var i in item) {
-					if ((i == 'name' || i == "class") && item[i].indexOf(value.trim()) >= 0) {
-						return true;
-					}
-				}
-			});
-		} else {
-			filterData = dataList;
-		}
-		var template = getTableThree();
-		Mustache.parse(template);
-		var tableThreeHTML = Mustache.render(template, {
-			three_table: filterData
-		});
-		$ele.empty().append(tableThreeHTML);
-	});
-}
-/******************************** todo **************************************/
-
 //初始化广场列表
 function initAreaList() {
 	var fileName = 'area_list.json';
@@ -263,19 +240,57 @@ function bindAreaTrEvent() {
 
 
 /******************************** todo **************************************/
+//监测键盘输入内容时搜素
+function inputEvent(result, $eles, $ele, index) {
+    $eles.on('keyup', function() {
+        var value = $(this).val();
+        var dataList = result.one_table[index].list;
+        var filterData = [];
+        if (value.trim() !== '') {
+            filterData = _.filter(dataList, (item) => {
+                for (var i in item) {
+                    if ((i == 'name' || i == "class") && item[i].indexOf(value.trim()) >= 0) {
+                        return true;
+                    }
+                }
+            });
+        } else {
+            filterData = dataList;
+        }
+        var template = getTableThree();
+        Mustache.parse(template);
+        var tableThreeHTML = Mustache.render(template, {
+            list: filterData
+        });
+        $ele.empty().append(tableThreeHTML);
+    });
+}
+/******************************** todo **************************************/
+
+
+/******************************** todo **************************************/
 //点击第一个表格分类事件
-function clickOneTable(result) {
-	$('.show_detail .one_table button').click(function() {
+function clickOneTable(result, $eles, $ele) {
+	$eles.click(function() {
+		$(this).addClass('active').siblings().removeClass('active');
 		var index = $(this).index();
-		console.log(result.one_table[index].list);
+		//重新渲染
+        var template = getTableThree();
+        Mustache.parse(template);
+        var tableThreeHTML = Mustache.render(template, result.one_table[index]);
+        $ele.empty().append(tableThreeHTML);
+        //调用方法
+        clickThreeTable(result, index);
+        inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+        inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
 	});
 }
 
 //点击第三个表格分类事件
-function clickThreeTable(result) {
+function clickThreeTable(result, index) {
 	$(".show_detail .three_table .content .threeTableClass").click(function() {
-		var index = $(this).index() - 1;
-		console.log(result.three_table[index].lon + '---' + result.three_table[index].lat);
+		var index1 = $(this).index() - 1;
+		console.log(result.one_table[index].list[index1].lon + '---' + result.one_table[index].list[index1].lat);
 	});
 }
 /******************************** todo **************************************/

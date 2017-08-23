@@ -17,7 +17,7 @@ function getTableTwo() {
 }
 /*表格三*/
 function getTableThree() {
-	var tableThree = '<div class="threeTableTitle">' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#three_table}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/three_table}}';
+	var tableThree = '<div class="threeTableTitle">' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
 	return tableThree;
 }
 
@@ -30,7 +30,7 @@ function getAreaTable() {
 //点击右边banner出现的各个表格
 /*表格一*/
 function getTableOneRight() {
-	var tableOneRight = '{{#one_table}}<button class="large ui button">' + '<span>{{number}}</span>' + '<span>/{{percentage}}%</span>' + '<p>{{class}}</p>' + '</button>{{/one_table}}';
+	var tableOneRight = '{{#one_table}}<button class="large ui button button{{id}}">' + '<span>{{number}}</span>' + '<span>/{{percentage}}%</span>' + '<p>{{class}}</p>' + '</button>{{/one_table}}';
 	return tableOneRight;
 }
 /*表格二*/
@@ -40,6 +40,6 @@ function getTableTwoRight() {
 }
 /*表格三*/
 function getTableThreeRight() {
-	var tableThreeRight = '<div>' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#three_table}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/three_table}}';
+	var tableThreeRight = '<div>' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
 	return tableThreeRight;
 }

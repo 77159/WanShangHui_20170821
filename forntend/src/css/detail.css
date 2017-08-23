@@ -29,6 +29,7 @@
     background: #323946;
     color: #fff;
 }
+.show_detail .one_table button.active,
 .show_detail .one_table button:hover{
     background: #DD603B;
     color: #fff;
@@ -77,7 +78,9 @@
 }
 /*第三个表*/
 .show_detail .three_table{
+    overflow-y: auto;
     margin-bottom: 10px;
+    background: #485164;
 }
 .show_detail .three_table .card{
     background: #485164;

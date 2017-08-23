@@ -2,17 +2,17 @@
 	"leftBanner": [{
 		"title": "城市列表",
 		"icon": "images/icon/drink.png",
-		"number": "100",
-		"desp": "业态占比",
+		"number": "6",
+		"desp": "全国占比",
 		"direction": "left",
-		"despNo": "20%",
+		"despNo": "3%",
 		"bgcolor": "drink",
 		"id": "1",
 		"visible": "visible"
 	}, {
 		"title": "餐饮",
 		"icon": "images/icon/drink.png",
-		"number": "100",
+		"number": "78",
 		"direction": "left",
 		"desp": "业态占比",
 		"despNo": "20%",

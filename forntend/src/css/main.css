@@ -52,7 +52,7 @@ body {
 .ui.black-gray.button:hover,
 .ui.black-gray.buttons .button:hover,
 .ui.black-gray.buttons .button.active {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 1);
     color: #fff;
     text-shadow: none;
 }
@@ -166,6 +166,8 @@ body {
 
 .search-center .ui.input input {
     width: 246px;
+    background-color: rgba(63, 72, 93, 0.95);
+    color: #ffffff;
 }
 
 .search-center .ui.input .ui.button {

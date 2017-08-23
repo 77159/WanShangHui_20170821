@@ -1,137 +1,519 @@
 {
 	"one_table": [{
 		"id": "1",
-		"number": "10",
+		"number": "13",
 		"percentage": "5",
-		"class": "女性服饰",
+		"class": "服饰鞋包",
 		"list": [{
-			"lon":111,
-			"lat":111,
-			"name":"test"
+			"id": "10",
+			"name": "UNDERARMOUR",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "37",
+			"consume": "564"
+		}, {
+			"id": "11",
+			"name": "GUESS",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "37",
+			"consume": "543"
+		}, {
+			"id": "12",
+			"name": "重回汉唐汉服实体店",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "37",
+			"consume": "429"
+		}, {
+			"id": "13",
+			"name": "ochirly",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "20",
+			"consume": "150"
+		}, {
+			"id": "14",
+			"name": "GXG",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "5",
+			"consume": "150"
+		}, {
+			"id": "15",
+			"name": "MUOI",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "66",
+			"consume": "238"
+		}, {
+			"id": "16",
+			"name": "海澜之家",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "27",
+			"consume": "912"
+		}, {
+			"id": "17",
+			"name": "ONLY",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "77",
+			"consume": "900"
+		}, {
+			"id": "18",
+			"name": "芬狄诗fandecie",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "16",
+			"consume": "150"
+		}, {
+			"id": "19",
+			"name": "兰卓丽",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "6",
+			"consume": "150"
+		}, {
+			"id": "20",
+			"name": "BeLLE",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "49",
+			"consume": "573"
+		}, {
+			"id": "21",
+			"name": "STACCATO",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "23",
+			"consume": "862"
+		}, {
+			"id": "22",
+			"name": "katespade",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "63",
+			"consume": "1898"
+		}, {
+			"id": "23",
+			"name": "kipling",
+			"class": "服饰鞋包",
+			"lon": "0",
+			"lat": "0",
+			"flow": "50",
+			"consume": "1117"
 		}]
 	}, {
 		"id": "2",
-		"number": "16",
+		"number": "5",
 		"percentage": "5",
-		"class": "男性服饰",
+		"class": "品牌折扣店",
 		"list": [{
-			"lon":222,
-			"lat":222,
-			"name":"test"
+			"id": "30",
+			"name": "外贸原单折扣店",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "3",
+			"consume": "-"
+		}, {
+			"id": "31",
+			"name": "贝特工厂店",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "1",
+			"consume": "-"
+		}, {
+			"id": "32",
+			"name": "凯米切",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "1",
+			"consume": "-"
+		}, {
+			"id": "33",
+			"name": "牛奶折扣店",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "1",
+			"consume": "-"
+		}, {
+			"id": "34",
+			"name": "瑞声达助听器品牌折扣店",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "1",
+			"consume": "-"
+		}, {
+			"id": "35",
+			"name": "鹿王羊绒工厂店",
+			"class": "品牌折扣店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "12",
+			"consume": "-"
 		}]
 	}, {
 		"id": "3",
-		"number": "10",
+		"number": "15",
 		"percentage": "5",
-		"class": "老人服饰",
+		"class": "眼镜店",
 		"list": [{
-			"lon":333,
-			"lat":333,
-			"name":"test"
+			"id": "40",
+			"name": "陈阿姨眼镜店广告",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "313",
+			"consume": "402"
+		}, {
+			"id": "41",
+			"name": "三叶眼镜城小胖眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "1633",
+			"consume": "355"
+		}, {
+			"id": "42",
+			"name": "新视力眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "77",
+			"consume": "641"
+		}, {
+			"id": "43",
+			"name": "三叶眼镜城嘿嘿光学眼镜店",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "72",
+			"consume": "264"
+		}, {
+			"id": "44",
+			"name": "三叶眼镜城视稷眼镜店",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "162",
+			"consume": "394"
+		}, {
+			"id": "45",
+			"name": "OEO眼镜工厂店",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "335",
+			"consume": "246"
+		}, {
+			"id": "46",
+			"name": "EXE颜镜店",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "626",
+			"consume": "506"
+		}, {
+			"id": "47",
+			"name": "JINS",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "125",
+			"consume": "792"
+		}, {
+			"id": "48",
+			"name": "亨视眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "336",
+			"consume": "639"
+		}, {
+			"id": "49",
+			"name": "PQ眼镜分店",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "76",
+			"consume": "207"
+		}, {
+			"id": "50",
+			"name": "宝岛眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "232",
+			"consume": "5730"
+		}, {
+			"id": "51",
+			"name": "ZOFF",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "204",
+			"consume": "1008"
+		}, {
+			"id": "52",
+			"name": "木九十",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "63",
+			"consume": "575"
+		}, {
+			"id": "53",
+			"name": "希多蜜眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "56",
+			"consume": "509"
+		}, {
+			"id": "54",
+			"name": "朱师傅眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "184",
+			"consume": "410"
+		}, {
+			"id": "55",
+			"name": "天使眼镜",
+			"class": "眼镜店",
+			"lon": "0",
+			"lat": "0",
+			"flow": "969",
+			"consume": "315"
 		}]
 	}, {
 		"id": "4",
-		"number": "10",
+		"number": "9",
 		"percentage": "5",
-		"class": "小孩服饰",
+		"class": "运动户外",
 		"list": [{
-			"lon":444,
-			"lat":444,
-			"name":"test"
+			"id": "60",
+			"name": "DECATHLON",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "412",
+			"consume": "210"
+		}, {
+			"id": "61",
+			"name": "NIKE",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "447",
+			"consume": "613"
+		}, {
+			"id": "62",
+			"name": "adidasoriginals",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "57",
+			"consume": "813"
+		}, {
+			"id": "63",
+			"name": "newbalance",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "26",
+			"consume": "808"
+		}, {
+			"id": "64",
+			"name": "VANS",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "30",
+			"consume": "570"
+		}, {
+			"id": "65",
+			"name": "圣羿羽毛球工作室",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "41",
+			"consume": "409"
+		}, {
+			"id": "66",
+			"name": "CONVERSE",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "24",
+			"consume": "237"
+		}, {
+			"id": "67",
+			"name": "上海竞步健康生活馆",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "28",
+			"consume": "5351"
+		}, {
+			"id": "68",
+			"name": "YONEX",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "23",
+			"consume": "503"
+		}, {
+			"id": "69",
+			"name": "GIANT",
+			"class": "运动户外",
+			"lon": "0",
+			"lat": "0",
+			"flow": "28",
+			"consume": "1189"
 		}]
 	}, {
 		"id": "5",
-		"number": "16",
+		"number": "13",
 		"percentage": "5",
-		"class": "大人服饰",
+		"class": "珠宝饰品",
 		"list": [{
-			"lon":555,
-			"lat":555,
-			"name":"test"
-		}]
-	}, {
-		"id": "6",
-		"number": "10",
-		"percentage": "5",
-		"class": "运动休闲",
-		"list": [{
-			"lon":666,
-			"lat":666,
-			"name":"test"
-		}]
-	},  {
-		"id": "7",
-		"number": "10",
-		"percentage": "5",
-		"class": "清新脱俗",
-		"list": [{
-			"lon":777,
-			"lat":777,
-			"name":"test"
-		}]
-	}, {
-		"id": "8",
-		"number": "16",
-		"percentage": "5",
-		"class": "冬季畅销",
-		"list": [{
-			"lon":888,
-			"lat":888,
-			"name":"test"
-		}]
-	}, {
-		"id": "9",
-		"number": "16",
-		"percentage": "5",
-		"class": "其它服饰",
-		"list": [{
-			"lon":999,
-			"lat":999,
-			"name":"test"
+			"id": "70",
+			"name": "结绳记",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "137",
+			"consume": "290"
+		}, {
+			"id": "71",
+			"name": "Pandora",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "122",
+			"consume": "2933"
+		}, {
+			"id": "72",
+			"name": "彭浦第一编",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "66",
+			"consume": "69"
+		}, {
+			"id": "73",
+			"name": "DanielWellington",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "91",
+			"consume": "1519"
+		}, {
+			"id": "74",
+			"name": "招财猫",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "38",
+			"consume": "219"
+		}, {
+			"id": "75",
+			"name": "LOVE&LOVE",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "23",
+			"consume": "150"
+		}, {
+			"id": "76",
+			"name": "kawaii",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "35",
+			"consume": "51"
+		}, {
+			"id": "77",
+			"name": "SWAROVSKI",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "40",
+			"consume": "1695"
+		}, {
+			"id": "78",
+			"name": "阿吉豆",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "18",
+			"consume": "174"
+		}, {
+			"id": "79",
+			"name": "Brosway",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "10",
+			"consume": "576"
+		}, {
+			"id": "80",
+			"name": "圣晶天然水晶",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "36",
+			"consume": "400"
+		}, {
+			"id": "81",
+			"name": "ANUBIS",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "26",
+			"consume": "1957"
+		}, {
+			"id": "82",
+			"name": "Casio",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "27",
+			"consume": "685"
+		}, {
+			"id": "83",
+			"name": "宸玺原创首饰",
+			"class": "珠宝饰品",
+			"lon": "0",
+			"lat": "0",
+			"flow": "16",
+			"consume": "201"
 		}]
 	}],
 
 	"two_table": [{
 		"id": "9",
-		"total": "100",
-		"price": "350"
-	}],
-
-	"three_table": [{
-		"id": "10",
-		"name": "阿迪达斯",
-		"class": "运动",
-		"lon":101010,
-		"lat":101010
-	}, {
-		"id": "11",
-		"name": "李宁",
-		"class": "运动",
-		"lon":111111,
-		"lat":111111
-	}, {
-		"id": "12",
-		"name": "乔丹",
-		"class": "运动",
-		"lon":121212,
-		"lat":121212
-	}, {
-		"id": "13",
-		"name": "耐克",
-		"class": "运动",
-		"lon":131313,
-		"lat":131313
-	}, {
-		"id": "14",
-		"name": "面条",
-		"class": "主食",
-		"lon":141414,
-		"lat":141414
-	}, {
-		"id": "15",
-		"name": "米饭",
-		"class": "主食",
-		"lon":151515,
-		"lat":151515
+		"total": "10",
+		"price": "50"
 	}]
 }
