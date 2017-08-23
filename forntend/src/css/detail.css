@@ -77,8 +77,10 @@
     width: 30%;
 }
 /*第三个表*/
-.show_detail .three_table{
+#three_table, #right_three_table{
     overflow-y: auto;
+}
+.show_detail .three_table{
     margin-bottom: 10px;
     background: #485164;
 }
@@ -107,6 +109,27 @@
 .three_table input::-webkit-input-placeholder { /* WebKit browsers */
     color: #fff;
 }
+
+/*  todo   *************************************************************************** */
+.show_detail .three_table .threeTableTitle{
+    border-bottom: 1px solid #A4A8B2;
+    line-height: 36px;
+    background: #323946;
+}
+.show_detail .three_table .threeTableTitle span{
+    display: inline-block;
+    text-align: center;
+}
+.show_detail .three_table .threeTableTitle span:nth-of-type(1){
+    border-right: 1px solid #A4A8B2;
+    line-height: 20px;
+    width: 65%;
+}
+.show_detail .three_table .threeTableTitle span:nth-of-type(2){
+    width: 30%;
+}
+/*  todo   *************************************************************************** */
+
 .show_detail .three_table .content{
     padding: 1px;
 }
@@ -116,10 +139,10 @@
 .show_detail .three_table .content div{
     border-bottom: 1px solid #A4A8B2;
 }
-.show_detail .three_table .content div:nth-of-type(1){
+/*.show_detail .three_table .content div:nth-of-type(1){
     border-bottom: 1px solid #A4A8B2;
     background: #323946;
-}
+}*/
 .show_detail .three_table .content div span{
     display: inline-block;
     text-align: center;
@@ -152,6 +175,7 @@
     border-radius: 5px;
     overflow-y: auto;
     background: #485164;
+    border: 1px solid #fff;
 }
 .static_detail_right{
     position: absolute;
@@ -163,6 +187,7 @@
     border-radius: 5px;
     overflow-y: auto;
     background: #485164;
+    border: 1px solid #fff;
 }
 
 .static_detail_left .echarts_view{

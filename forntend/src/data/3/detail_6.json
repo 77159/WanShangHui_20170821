@@ -84,44 +84,6 @@
 			"lat": "0",
 			"flow": "9",
 			"consume": "134"
-		}, {
-			"id": "20",
-			"name": "花冠鲜花",
-			"class": "绿色养生",
-			"lon": "0",
-			"lat": "0",
-			"flow": "2",
-			"consume": "147"
-		}, {
-			"id": "21",
-			"name": "花冠鲜花",
-			"class": "绿色养生",
-			"lon": "0",
-			"lat": "0",
-			"flow": "2",
-			"consume": "147"
-		}, {
-			"id": "22",
-			"name": "花冠鲜花",
-			"class": "绿色养生",
-			"lon": "0",
-			"lat": "0",
-			"flow": "1",
-			"consume": "147"
-		}]
-	}, {
-		"id": "2",
-		"number": "1",
-		"percentage": "5",
-		"class": "其它",
-		"list": [{
-			"id": "30",
-			"name": "瑞国蒙馆",
-			"class": "其它",
-			"lon": "0",
-			"lat": "0",
-			"flow": "19",
-			"consume": "-"
 		}]
 	}],
 

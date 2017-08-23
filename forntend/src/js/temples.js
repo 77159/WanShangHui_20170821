@@ -17,7 +17,7 @@ function getTableTwo() {
 }
 /*表格三*/
 function getTableThree() {
-	var tableThree = '<div class="threeTableTitle">' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
+	var tableThree = '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
 	return tableThree;
 }
 
@@ -40,6 +40,6 @@ function getTableTwoRight() {
 }
 /*表格三*/
 function getTableThreeRight() {
-	var tableThreeRight = '<div>' + '<span>名称</span>' + '<span>细分业态</span>' + '</div>' + '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
+	var tableThreeRight = '{{#list}}<div class="threeTableClass">' + '<span>{{name}}</span>' + '<span>{{class}}</span>' + '</div>{{/list}}';
 	return tableThreeRight;
 }
