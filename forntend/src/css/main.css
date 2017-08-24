@@ -87,12 +87,17 @@ body {
 /******************通用metarialUi 样式（end）******************************/
 
 .map-container {
-    position: absolute;
+    position: relative;
+    margin: 0px;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    /* position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: #f0f4f4;
+    background-color: #f0f4f4; */
 }
 
 #totalMenu {
@@ -199,4 +204,8 @@ body {
 }
 .cesium-viewer-toolbar .cesium-sceneModePicker-wrapper{
     z-index: 9;
+}
+
+#cesiumContainer .cesium-viewer .cesium-viewer-bottom .cesium-widget-credits {
+    display: none;
 }

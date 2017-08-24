@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	clickLeftStatic();
 	clickRightStatic();
+    clickInfo();
 });
 
 //点击统计详情
@@ -16,6 +17,13 @@ function clickRightStatic() {
 		$('.static_detail_right').transition('fade left');
         fadePanel($('#detail_left'), 'fade'); //隐藏统计列表面板
 	});
+}
+
+//点击关闭信息框
+function clickInfo() {
+    $('#info .remove').click(function () {
+        $('#info').transition('fade');
+    });
 }
 
 /*echarts视图*/

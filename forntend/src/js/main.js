@@ -17,7 +17,12 @@
     function init(container) {
         // create a cesium viewer
         viewer = new Cesium.Viewer('cesiumContainer', {
-            shadows: false
+            shadows: false,
+            timeline: false,
+            fullscreenButton: false,
+            homeButton: false,
+            animation: false,
+            projectionPicker: true
         });
 
         // set time

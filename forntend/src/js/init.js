@@ -5,8 +5,11 @@
  */
 
 var dataUrl = "../",
-	wandaServer = 'http://192.168.1.85:8001';
+	wandaServer = 'http://192.168.1.128';
 var curMile = 3; //3：3公里，5:5公里，10:10公里，15:15公里
+var curBannerIndex = -1,
+	preBannerIndex = -1;
+var id;
 $(document).ready(function() {
 	qiu.init('cesiumContainer'); //添加球
 	//添加广场列表
@@ -14,6 +17,7 @@ $(document).ready(function() {
 	//重新添加菜单
 	initMenus();
 	bindMilesButtonEvent();
+	initCity();
 });
 
 //动态获取左右两边的menus
@@ -27,28 +31,41 @@ function initMenus() {
 	});
 }
 
-/******************************** todo **************************************/
+//获取area_list.json数据
+function initCity() {
+	var fileName = 'area_list.json';
+	var url = 'data/' + fileName;
+	$.getJSON(url, function(result) {
+		clickCity(result);
+	})
+}
+
+
 function initTable(id, parentDiv, type) {
 	var fileName = 'detail_' + (id - 1) + '.json';
 	var url = 'data/' + curMile + '/' + fileName;
 	var index = 0;
 	$.getJSON(url, function(result) {
-		if(type === 'left'){
-            initTableOneHtml(result, $('#one_table'));
-            initTableTwoHtml(result, $('#two_table'));
-            initTableThreeHtml(result, $('#three_table'));
-            clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'));
-            inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
-		}else {
-            initTableOneHtmlRight(result, $('#right_one_table'));
-            initTableTwoHtmlRight(result, $('#right_two_table'));
-            initTableThreeHtmlRight(result, $('#right_three_table'));
-            clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'));
-            inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
+		if (type === 'left') {
+			initTableOneHtml(result, $('#one_table'));
+			initTableTwoHtml(result, $('#two_table'));
+			initTableThreeHtml(result, $('#three_table'));
+			clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'));
+			inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+		} else {
+			initTableOneHtmlRight(result, $('#right_one_table'));
+			initTableTwoHtmlRight(result, $('#right_two_table'));
+			initTableThreeHtmlRight(result, $('#right_three_table'));
+			clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'));
+			inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
 		}
+
+		clickThreeTable(result, index); //下面表格的点击事件
+
+		addMarkers((id - 1), result.one_table[index].list); //添加marker;
+
 	});
 }
-/******************************** todo **************************************/
 
 
 function initBannerHtml(data, parentDiv) {
@@ -61,13 +78,12 @@ function initBannerHtml(data, parentDiv) {
 }
 
 
-/******************************** todo **************************************/
 function initTableOneHtml(data, parentDiv) {
 	var templ = getTableOne();
 	Mustache.parse(templ); // optional, speeds up future uses
 	var tableOneHTML = Mustache.render(templ, data);
 	parentDiv.empty().append(tableOneHTML);
-    $('#detail_left .one_table .button1').addClass('active');//默认第一个选中
+	$('#detail_left .one_table .button1').addClass('active'); //默认第一个选中
 }
 
 function initTableTwoHtml(data, parentDiv) {
@@ -83,13 +99,13 @@ function initTableThreeHtml(data, parentDiv) {
 	var tableThreeHTML = Mustache.render(templ, data.one_table[0]);
 	parentDiv.empty().append(tableThreeHTML);
 }
-/***** todo ******/
+
 function initTableOneHtmlRight(data, parentDiv) {
 	var templ = getTableOneRight();
 	Mustache.parse(templ); // optional, speeds up future uses
 	var tableOneHTMLRight = Mustache.render(templ, data);
 	parentDiv.empty().append(tableOneHTMLRight);
-    $('#detail_right .one_table .button1').addClass('active');//默认第一个选中
+	$('#detail_right .one_table .button1').addClass('active'); //默认第一个选中
 }
 
 function initTableTwoHtmlRight(data, parentDiv) {
@@ -105,7 +121,6 @@ function initTableThreeHtmlRight(data, parentDiv) {
 	var tableThreeHTMLRight = Mustache.render(templ, data.one_table[0]);
 	parentDiv.empty().append(tableThreeHTMLRight);
 }
-/******************************** todo **************************************/
 
 
 
@@ -113,24 +128,48 @@ function initTableThreeHtmlRight(data, parentDiv) {
 function bindBannerCardEvent() {
 	//绑定总的列表事件
 	$('.ui.cards .card').on('click', function() {
+		var index = $('.ui.cards .card').index($(this));
+
 		if ($(this).hasClass('active')) {
 			$(this).removeClass('active');
 		} else {
 			$(this).addClass('active');
 		}
 
-		var index = $('.ui.cards .card').index($(this));
+		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
+
 		if (index == 0) {
+			//移除现有图标
+			removeMarkers("left");
+			removeMarkers("right");
+
 			fadePanel($('#detail_left'), 'fade'); //隐藏详细列表面板
 			fadePanel($('#detail_right'), 'fade'); //隐藏详细列表面板
+			$('.ui.cards .card:not(:eq(0))').removeClass('active');
 
-			initAreaList();
+			if ($(this).hasClass('active'))
+				initAreaList();
 			$('#list_left').transition('slide right');
 		} else {
 			var id = $(this).data('id'),
 				direction = $(this).data('direction');
+			removeMarkers(direction);
 			showDetailsPanel(id, direction);
+			if(id === 2) {
+                $("#info .content p:eq(2) span:eq(0)").html('日均流量：&nbsp;&nbsp;');
+                $("#info .content p:eq(2) span:eq(2)").html('人/天');
+                $("#info .content p:eq(3) span:eq(0)").html('人均消费：&nbsp;&nbsp;');
+                $("#info .content p:eq(3) span:eq(2)").html('/人/次');
+			}else if(id === 3){
+                $("#info .content p:eq(2) span:eq(0)").html('平均价格：&nbsp;&nbsp;');
+                $("#info .content p:eq(2) span:eq(2)").html('/元');
+                $("#info .content p:eq(3) span:eq(0)").html('总价格：&nbsp;&nbsp;');
+                $("#info .content p:eq(3) span:eq(2)").html('/元');
+			}
+
 		}
+		preBannerIndex = curBannerIndex;
+		curBannerIndex = index;
 	});
 }
 
@@ -142,7 +181,8 @@ function bindBannerCardEvent() {
  */
 function showDetailsPanel(id, type) {
 	//渲染表格数据
-	initTable(parseInt(id), $('#detail_' + type), type);
+	if ($('.ui.cards .card[data-id="' + id + '"]').hasClass('active'))
+		initTable(parseInt(id), $('#detail_' + type), type);
 
 	fadePanel($('.static_detail_left'), 'fade'); //隐藏统计列表面板
 	fadePanel($('.static_detail_right'), 'fade'); //隐藏统计列表面板
@@ -152,6 +192,7 @@ function showDetailsPanel(id, type) {
 	var panelDirec = type == 'left' ? 'right' : 'left',
 		openDetailId = $('#detail_' + type).data('id'),
 		visible = $('#detail_' + type).hasClass("visible");
+
 	if (!openDetailId && !visible) {
 		$('#detail_' + type).transition('slide ' + panelDirec);
 	} else if (openDetailId == id) {
@@ -175,6 +216,11 @@ function fadePanel(panel, animate) {
 		panel.transition(animate); //隐藏统计列表面板
 }
 
+function pausePanel(panel, animate) {
+	if (panel.css('display') != 'none')
+		panel.transition(animate); //隐藏统计列表面板
+}
+
 //公里按钮切换样式
 function bindMilesButtonEvent() {
 	$('.search-center .ui.buttons .button').on('click', function() {
@@ -189,7 +235,9 @@ function bindMilesButtonEvent() {
 			$('#detail_right').transition('horizontal flip');
 		}
 		//重新添加菜单
-		initMenus();
+		//initMenus();
+
+		addCircle(curMile);
 	});
 }
 
@@ -205,9 +253,11 @@ function initAreaList() {
 		var tableThreeHTMLRight = Mustache.render(templ, result);
 		$('#list_left .content').empty().append(tableThreeHTMLRight);
 		bindAreaTrEvent();
+		clickCity(result);
 	});
 }
 
+//绑定城市列表每行的点击事件
 function bindAreaTrEvent() {
 	$('#list_left .content .list-tr').on('click', function() {
 		var index = $('#list_left .content .list-tr').index($(this));
@@ -226,10 +276,15 @@ function bindAreaTrEvent() {
 				}
 			});
 
-			$('#list_left').transition('slide right');
+			//$('#list_left').transition('slide right');
+
+			var lon = $(this).data('lon'),
+				lat = $(this).data('lat');
+			flyToPoint(parseFloat(lon), parseFloat(lat));
+
+			addCircle(curMile);
 		}
 	});
-
 	//进入室内地图按钮
 	$('#list_left .content .list-tr u').on('click', function(event) {
 		event.preventDefault();
@@ -239,58 +294,92 @@ function bindAreaTrEvent() {
 }
 
 
-/******************************** todo **************************************/
 //监测键盘输入内容时搜素
 function inputEvent(result, $eles, $ele, index) {
-    $eles.on('keyup', function() {
-        var value = $(this).val();
-        var dataList = result.one_table[index].list;
-        var filterData = [];
-        if (value.trim() !== '') {
-            filterData = _.filter(dataList, (item) => {
-                for (var i in item) {
-                    if ((i == 'name' || i == "class") && item[i].indexOf(value.trim()) >= 0) {
-                        return true;
-                    }
-                }
-            });
-        } else {
-            filterData = dataList;
-        }
-        var template = getTableThree();
-        Mustache.parse(template);
-        var tableThreeHTML = Mustache.render(template, {
-            list: filterData
-        });
-        $ele.empty().append(tableThreeHTML);
-    });
+	$eles.on('keyup', function() {
+		var value = $(this).val();
+		var dataList = result.one_table[index].list;
+		var filterData = [];
+		if (value.trim() !== '') {
+			filterData = _.filter(dataList, (item) => {
+				for (var i in item) {
+					if ((i == 'name' || i == "class") && item[i].indexOf(value.trim()) >= 0) {
+						return true;
+					}
+				}
+			});
+		} else {
+			filterData = dataList;
+		}
+		var template = getTableThree();
+		Mustache.parse(template);
+		var tableThreeHTML = Mustache.render(template, {
+			list: filterData
+		});
+		$ele.empty().append(tableThreeHTML);
+	});
 }
-/******************************** todo **************************************/
 
 
-/******************************** todo **************************************/
 //点击第一个表格分类事件
 function clickOneTable(result, $eles, $ele) {
 	$eles.click(function() {
+		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
+
 		$(this).addClass('active').siblings().removeClass('active');
 		var index = $(this).index();
 		//重新渲染
-        var template = getTableThree();
-        Mustache.parse(template);
-        var tableThreeHTML = Mustache.render(template, result.one_table[index]);
-        $ele.empty().append(tableThreeHTML);
-        //调用方法
-        clickThreeTable(result, index);
-        inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
-        inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
+		var template = getTableThree();
+		Mustache.parse(template);
+		var tableThreeHTML = Mustache.render(template, result.one_table[index]);
+		$ele.empty().append(tableThreeHTML);
+		//调用方法
+		clickThreeTable(result, index);
+		inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+		inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
+
+		//移除上次的marker
+		//removeMarkers(curBannerIndex);
+		addMarkers(curBannerIndex, result.one_table[index].list); //添加本次的marker
 	});
 }
 
 //点击第三个表格分类事件
 function clickThreeTable(result, index) {
 	$(".show_detail .three_table .content .threeTableClass").click(function() {
-		var index1 = $(this).index() - 1;
-		console.log(result.one_table[index].list[index1].lon + '---' + result.one_table[index].list[index1].lat);
+
+		var index1 = $(this).index(),
+			lon = parseFloat(result.one_table[index].list[index1].lon),
+			lat = parseFloat(result.one_table[index].list[index1].lat);
+		highlightOneMarker(result.one_table[index].list[index1]);
+		flyToPoint(lon, lat);
+		showInfoWin(highlightMarker.data);
 	});
 }
-/******************************** todo **************************************/
+
+//显示信息框
+function showInfoWin(data) {
+	//信息框的信息展示
+	if (!$('#info').hasClass('false'))
+		$('#info').transition('pulse');
+	$($("#info .content").children('p').get(0)).html(data.name);
+	$($("#info .content").children('p').get(1)).html(data.class);
+	$("#info .content p:eq(3) span").eq(1).html(data.consume);
+	$("#info .content p:eq(2) span:eq(1)").html(data.flow);
+}
+
+//点击不同广场切换数据
+function clickCity(result) {
+	$('#list_left .content .list-tr').on('click', function() {
+		var index = $('#list_left .content .list-tr').index($(this));
+		$($('#city #city_one .content_txt')).html(result.list[index].address);
+		$($('#city #city_two .content_txt')).html(result.list[index].content);
+		$($('#city #city_three .content_txt')).html(result.list[index].shoppings);
+		/*$('#city #city_four .content_detail div:eq(0) span:eq(1)').html(result.list[index].info[0].canyin);
+		$('#city #city_four .content_detail div:eq(1) span:eq(1)').html(result.list[index].info[0].fuzhuang);
+		$('#city #city_four .content_detail div:eq(2) span:eq(1)').html(result.list[index].info[0].shenghuo);
+		$('#city #city_four .content_detail div:eq(3) span:eq(1)').html(result.list[index].info[0].tiyan);
+		$('#city #city_four .content_detail div:eq(4) span:eq(1)').html(result.list[index].info[0].ertong);*/
+		$('#city #city_five .content_detail div span:eq(1)').html(result.list[index].remains);
+	});
+}
