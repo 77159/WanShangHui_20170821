@@ -99,7 +99,7 @@ body {
     width: 200px;
     height: 88px;
     position: absolute;
-    top: 50px;
+    top: 70px;
     left: 15px;
 }
 
@@ -110,12 +110,12 @@ body {
 }
 
 #leftBanner {
-    top: 50px;
+    top: 70px;
     left: 15px;
 }
 
 #rightBanner {
-    top: 50px;
+    top: 70px;
     right: 15px;
 }
 
