@@ -50,20 +50,20 @@ function initTable(id, parentDiv, type) {
 			initTableOneHtml(result, $('#one_table'));
 			initTableTwoHtml(result, $('#two_table'));
 			initTableThreeHtml(result, $('#three_table'));
-			clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'));
+			clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'), id);
 			inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+			//点击表格每行事件
+			clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
 		} else {
 			initTableOneHtmlRight(result, $('#right_one_table'));
 			initTableTwoHtmlRight(result, $('#right_two_table'));
 			initTableThreeHtmlRight(result, $('#right_three_table'));
-			clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'));
+			clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'), id);
 			inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
+			clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
 		}
 
-		clickThreeTable(result, index); //下面表格的点击事件
-
 		addMarkers((id - 1), result.one_table[index].list); //添加marker;
-
 	});
 }
 
@@ -153,19 +153,9 @@ function bindBannerCardEvent() {
 		} else {
 			var id = $(this).data('id'),
 				direction = $(this).data('direction');
+            clickSwitch(id);
 			removeMarkers(direction);
 			showDetailsPanel(id, direction);
-			if(id === 2) {
-                $("#info .content p:eq(2) span:eq(0)").html('日均流量：&nbsp;&nbsp;');
-                $("#info .content p:eq(2) span:eq(2)").html('人/天');
-                $("#info .content p:eq(3) span:eq(0)").html('人均消费：&nbsp;&nbsp;');
-                $("#info .content p:eq(3) span:eq(2)").html('/人/次');
-			}else if(id === 3){
-                $("#info .content p:eq(2) span:eq(0)").html('平均价格：&nbsp;&nbsp;');
-                $("#info .content p:eq(2) span:eq(2)").html('/元');
-                $("#info .content p:eq(3) span:eq(0)").html('总价格：&nbsp;&nbsp;');
-                $("#info .content p:eq(3) span:eq(2)").html('/元');
-			}
 
 		}
 		preBannerIndex = curBannerIndex;
@@ -322,7 +312,7 @@ function inputEvent(result, $eles, $ele, index) {
 
 
 //点击第一个表格分类事件
-function clickOneTable(result, $eles, $ele) {
+function clickOneTable(result, $eles, $ele, id) {
 	$eles.click(function() {
 		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
 
@@ -334,26 +324,28 @@ function clickOneTable(result, $eles, $ele) {
 		var tableThreeHTML = Mustache.render(template, result.one_table[index]);
 		$ele.empty().append(tableThreeHTML);
 		//调用方法
-		clickThreeTable(result, index);
+		clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
+		clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
+
 		inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
 		inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
 
 		//移除上次的marker
 		//removeMarkers(curBannerIndex);
-		addMarkers(curBannerIndex, result.one_table[index].list); //添加本次的marker
+		addMarkers(id, result.one_table[index].list); //添加本次的marker
 	});
 }
 
-//点击第三个表格分类事件
-function clickThreeTable(result, index) {
-	$(".show_detail .three_table .content .threeTableClass").click(function() {
-
+//点击第三个表格分类每行事件
+function clickThreeTable(ele, result, index, id) {
+	ele.click(function() {
 		var index1 = $(this).index(),
 			lon = parseFloat(result.one_table[index].list[index1].lon),
 			lat = parseFloat(result.one_table[index].list[index1].lat);
 		highlightOneMarker(result.one_table[index].list[index1]);
 		flyToPoint(lon, lat);
-		showInfoWin(highlightMarker.data);
+		showInfoWin(result.one_table[index].list[index1]);
+        clickSwitch(id);
 	});
 }
 
@@ -366,6 +358,37 @@ function showInfoWin(data) {
 	$($("#info .content").children('p').get(1)).html(data.class);
 	$("#info .content p:eq(3) span").eq(1).html(data.consume);
 	$("#info .content p:eq(2) span:eq(1)").html(data.flow);
+}
+
+
+//点击切换信息框表头字段
+function clickSwitch(id) {
+    if(id === 7) {
+        $("#info .content p:eq(2) span:eq(0)").html('户数：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(2) span:eq(2)").html('户');
+        $("#info .content p:eq(3) span:eq(0)").html('单价：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(3) span:eq(2)").html('/元/平方米');
+    } else if(id === 8) {
+        $("#info .content p:eq(2) span:eq(0)").html('日租金：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(2) span:eq(2)").html('/元/天');
+        $("#info .content p:eq(3) span:eq(0)").html('月租金：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(3) span:eq(2)").html('/元/月');
+    } else if(id === 9) {
+        $("#info .content p:eq(2) span:eq(0)").html('平均学员：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(2) span:eq(2)").html('人');
+        $("#info .content p:eq(3) span:eq(0)").html('学员流量：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(3) span:eq(2)").html('/天');
+    } else if(id === 13) {
+        $("#info .content p:eq(2) span:eq(0)").html('交通人流：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(2) span:eq(2)").html('人');
+        $("#info .content p:eq(3) span:eq(0)").html('总人流：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(3) span:eq(2)").html('人');
+    } else {
+        $("#info .content p:eq(2) span:eq(0)").html('日均流量：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(2) span:eq(2)").html('人/天');
+        $("#info .content p:eq(3) span:eq(0)").html('人均消费：&nbsp;&nbsp;&nbsp;');
+        $("#info .content p:eq(3) span:eq(2)").html('/人/次');
+    }
 }
 
 //点击不同广场切换数据
