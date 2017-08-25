@@ -38,7 +38,7 @@
         });
 
         // set time
-        viewer.clock.currentTime = new Cesium.JulianDate(2457523, 43440.449272789105);
+        viewer.clock.currentTime = new Cesium.JulianDate(2457990, 65810.20864916773);
 
         scene = viewer.scene;
 
@@ -85,6 +85,7 @@
         // var entity = loadModel('baoshan', 158);
         var entity = loadModel('wujiao', -115);
 
+        var entity1 = loadModel('jiangqiao', 3.1);
     }
 
     function getNextTileIndex(index) {

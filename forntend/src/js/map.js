@@ -101,6 +101,11 @@ function flyToPoint(lon, lat) {
 	qiu.flyTo(getMarkerCoord(0.01 + lon, 0.014 + lat));
 }
 
+//聚焦到江桥
+function flyToJiangQiao() {
+	qiu.flyTo(qiu.coords.jiangqiao);
+}
+
 //添加圆圈
 function addCircle(rad) {
 	//先清除之前的marker

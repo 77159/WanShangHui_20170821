@@ -24,6 +24,13 @@
 				lat: 31.3036060454
 			}
 		},
+		jiangqiao: {
+			url: 'earth/models/jiangqiao.glb',
+			coord: {
+				lng: 121.3190839300,
+				lat: 31.2414593200
+			}
+		}
 	}
 
 	//
@@ -56,6 +63,13 @@
 			heading: 210.5,
 			pitch: -23.3,
 			height: 200
+		},
+		jiangqiao: {
+			lng: 121.3231812552 + 0.008,
+			lat: 31.2444013090 + 0.008,
+			heading: 225.5,
+			pitch: -24.3,
+			height: 800
 		}
 	}
 

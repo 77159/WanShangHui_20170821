@@ -153,10 +153,9 @@ function bindBannerCardEvent() {
 		} else {
 			var id = $(this).data('id'),
 				direction = $(this).data('direction');
-            clickSwitch(id);
+			clickSwitch(id);
 			removeMarkers(direction);
 			showDetailsPanel(id, direction);
-
 		}
 		preBannerIndex = curBannerIndex;
 		curBannerIndex = index;
@@ -273,6 +272,11 @@ function bindAreaTrEvent() {
 			flyToPoint(parseFloat(lon), parseFloat(lat));
 
 			addCircle(curMile);
+		} else if (index == 1) {
+			flyToJiangQiao();
+			// var lon = $(this).data('lon'),
+			// 	lat = $(this).data('lat');
+			//flyToPoint(parseFloat(lon), parseFloat(lat));
 		}
 	});
 	//进入室内地图按钮
@@ -285,7 +289,7 @@ function bindAreaTrEvent() {
 
 
 //监测键盘输入内容时搜素
-function inputEvent(result, $eles, $ele, index) {
+function inputEvent(result, $eles, $ele, index, id) {
 	$eles.on('keyup', function() {
 		var value = $(this).val();
 		var dataList = result.one_table[index].list;
@@ -307,6 +311,9 @@ function inputEvent(result, $eles, $ele, index) {
 			list: filterData
 		});
 		$ele.empty().append(tableThreeHTML);
+
+        clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
+        clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
 	});
 }
 
@@ -345,7 +352,7 @@ function clickThreeTable(ele, result, index, id) {
 		highlightOneMarker(result.one_table[index].list[index1]);
 		flyToPoint(lon, lat);
 		showInfoWin(result.one_table[index].list[index1]);
-        clickSwitch(id);
+		clickSwitch(id);
 	});
 }
 
@@ -363,32 +370,32 @@ function showInfoWin(data) {
 
 //点击切换信息框表头字段
 function clickSwitch(id) {
-    if(id === 7) {
-        $("#info .content p:eq(2) span:eq(0)").html('户数：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(2) span:eq(2)").html('户');
-        $("#info .content p:eq(3) span:eq(0)").html('单价：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(3) span:eq(2)").html('/元/平方米');
-    } else if(id === 8) {
-        $("#info .content p:eq(2) span:eq(0)").html('日租金：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(2) span:eq(2)").html('/元/天');
-        $("#info .content p:eq(3) span:eq(0)").html('月租金：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(3) span:eq(2)").html('/元/月');
-    } else if(id === 9) {
-        $("#info .content p:eq(2) span:eq(0)").html('平均学员：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(2) span:eq(2)").html('人');
-        $("#info .content p:eq(3) span:eq(0)").html('学员流量：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(3) span:eq(2)").html('/天');
-    } else if(id === 13) {
-        $("#info .content p:eq(2) span:eq(0)").html('交通人流：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(2) span:eq(2)").html('人');
-        $("#info .content p:eq(3) span:eq(0)").html('总人流：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(3) span:eq(2)").html('人');
-    } else {
-        $("#info .content p:eq(2) span:eq(0)").html('日均流量：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(2) span:eq(2)").html('人/天');
-        $("#info .content p:eq(3) span:eq(0)").html('人均消费：&nbsp;&nbsp;&nbsp;');
-        $("#info .content p:eq(3) span:eq(2)").html('/人/次');
-    }
+	if (id === 7) {
+		$("#info .content p:eq(2) span:eq(0)").html('户数：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(2) span:eq(2)").html('户');
+		$("#info .content p:eq(3) span:eq(0)").html('单价：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(3) span:eq(2)").html('/元/平方米');
+	} else if (id === 8) {
+		$("#info .content p:eq(2) span:eq(0)").html('日租金：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(2) span:eq(2)").html('/元/天');
+		$("#info .content p:eq(3) span:eq(0)").html('月租金：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(3) span:eq(2)").html('/元/月');
+	} else if (id === 9) {
+		$("#info .content p:eq(2) span:eq(0)").html('平均学员：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(2) span:eq(2)").html('人');
+		$("#info .content p:eq(3) span:eq(0)").html('学员流量：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(3) span:eq(2)").html('/天');
+	} else if (id === 13) {
+		$("#info .content p:eq(2) span:eq(0)").html('交通人流：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(2) span:eq(2)").html('人');
+		$("#info .content p:eq(3) span:eq(0)").html('总人流：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(3) span:eq(2)").html('人');
+	} else {
+		$("#info .content p:eq(2) span:eq(0)").html('日均流量：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(2) span:eq(2)").html('人/天');
+		$("#info .content p:eq(3) span:eq(0)").html('人均消费：&nbsp;&nbsp;&nbsp;');
+		$("#info .content p:eq(3) span:eq(2)").html('/人/次');
+	}
 }
 
 //点击不同广场切换数据
