@@ -196,8 +196,12 @@ body {
     width: 88px;
 }
 
-#list_left  .ui.card  .content .list-tr{
+#list_left  .ui.card  .content .list-tr {
     cursor: pointer;
+}
+
+#list_left  .ui.card  .content .list-tr.active {
+    background: #DD603B;
 }
 
 /*地图控件样式*/

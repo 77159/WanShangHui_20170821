@@ -7,6 +7,8 @@ $(document).ready(function() {
 //点击统计详情
 function clickLeftStatic() {
 	$('#toView').click(function() {
+	    let height = $('#detail_left').height() - 375;
+        $('.static_detail_left').css('top', height);
 		$('.static_detail_left').transition('fade left');
         fadePanel($('#detail_right'), 'fade'); //隐藏统计列表面板
 	});
@@ -14,6 +16,8 @@ function clickLeftStatic() {
 
 function clickRightStatic() {
 	$('#toViewRight').click(function() {
+        let height = $('#detail_right').height() - 375;
+        $('.static_detail_right').css('top', height);
 		$('.static_detail_right').transition('fade left');
         fadePanel($('#detail_left'), 'fade'); //隐藏统计列表面板
 	});
@@ -25,6 +29,8 @@ function clickInfo() {
         $('#info').transition('fade');
     });
 }
+
+
 
 /*echarts视图*/
 //初始化echarts

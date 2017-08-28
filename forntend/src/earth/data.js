@@ -22,14 +22,18 @@
 			coord: {
 				lng: 121.5100100389,
 				lat: 31.3036060454
-			}
+			},
+			mapID: '1000343',
+			mapName: '上海宝山万达广场'
 		},
 		jiangqiao: {
 			url: 'earth/models/jiangqiao.glb',
 			coord: {
 				lng: 121.3190839300,
 				lat: 31.2414593200
-			}
+			},
+			mapID: '1000108',
+			mapName: '上海江桥万达广场'
 		}
 	}
 

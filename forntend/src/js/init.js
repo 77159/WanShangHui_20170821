@@ -11,7 +11,9 @@ var curBannerIndex = -1,
 	preBannerIndex = -1;
 var id;
 $(document).ready(function() {
-	qiu.init('cesiumContainer'); //添加球
+	qiu.init('cesiumContainer', {
+		server: wandaServer
+	}); //添加球
 	//添加广场列表
 	//initAreaList();
 	//重新添加菜单
@@ -23,7 +25,7 @@ $(document).ready(function() {
 //动态获取左右两边的menus
 function initMenus() {
 	var fileName = 'menu_1.json';
-	var url = 'data/' + curMile + '/' + fileName;
+	var url = 'data/3/' + fileName;
 	$.getJSON(url, function(result) {
 		initBannerHtml(result.leftBanner, $('#leftBanner .ui.cards'));
 		initBannerHtml(result.rightBanner, $('#rightBanner .ui.cards'));
@@ -40,7 +42,6 @@ function initCity() {
 	})
 }
 
-
 function initTable(id, parentDiv, type) {
 	var fileName = 'detail_' + (id - 1) + '.json';
 	var url = 'data/' + curMile + '/' + fileName;
@@ -51,20 +52,26 @@ function initTable(id, parentDiv, type) {
 			initTableTwoHtml(result, $('#two_table'));
 			initTableThreeHtml(result, $('#three_table'));
 			clickOneTable(result, $('#detail_left .one_table button'), $('#three_table'), id);
-			inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
+			inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index, id);
 			//点击表格每行事件
-			clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
+			clickThreeTable($('#detail_left .three_table .content .threeTableClass'), getThreeTableItems(result, index), id);
 		} else {
 			initTableOneHtmlRight(result, $('#right_one_table'));
 			initTableTwoHtmlRight(result, $('#right_two_table'));
 			initTableThreeHtmlRight(result, $('#right_three_table'));
 			clickOneTable(result, $('#detail_right .one_table button'), $('#right_three_table'), id);
-			inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
-			clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
+			inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index, id);
+			clickThreeTable($('#detail_right .three_table .content .threeTableClass'), getThreeTableItems(result, index), id);
 		}
 
 		addMarkers((id - 1), result.one_table[index].list); //添加marker;
 	});
+}
+
+function getThreeTableItems(result, index) {
+	if (result && result.one_table && result.one_table[index] && result.one_table[index].list)
+		return result.one_table[index].list;
+	else return [];
 }
 
 
@@ -128,7 +135,12 @@ function initTableThreeHtmlRight(data, parentDiv) {
 function bindBannerCardEvent() {
 	//绑定总的列表事件
 	$('.ui.cards .card').on('click', function() {
-		var index = $('.ui.cards .card').index($(this));
+		var index = $('.ui.cards .card[data-direction=' + $(this).data('direction') + ']').index($(this));
+
+		//移除掉该方向的其他card的class = active的属性
+		if ((index == 0) && ($(this).data('direction') == 'left')) {} else {
+			$('.ui.cards .card[data-direction=' + $(this).data('direction') + ']').not(':eq(' + index + ')').removeClass('active');
+		}
 
 		if ($(this).hasClass('active')) {
 			$(this).removeClass('active');
@@ -138,7 +150,7 @@ function bindBannerCardEvent() {
 
 		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
 
-		if (index == 0) {
+		if ((index == 0) && ($(this).data('direction') == 'left')) {
 			//移除现有图标
 			removeMarkers("left");
 			removeMarkers("right");
@@ -147,7 +159,8 @@ function bindBannerCardEvent() {
 			fadePanel($('#detail_right'), 'fade'); //隐藏详细列表面板
 			$('.ui.cards .card:not(:eq(0))').removeClass('active');
 
-			if ($(this).hasClass('active'))
+			//第一次添加列表，其他显示或隐藏
+			if (!$('.ui.cards .card:not(:eq(0))').hasClass('visible'))
 				initAreaList();
 			$('#list_left').transition('slide right');
 		} else {
@@ -213,9 +226,17 @@ function pausePanel(panel, animate) {
 //公里按钮切换样式
 function bindMilesButtonEvent() {
 	$('.search-center .ui.buttons .button').on('click', function() {
-		curMile = parseInt($(this).data('mile')); //切换当前默认公里
 		$(this).addClass('active').siblings().removeClass('active');
 
+		var mileIndex = parseInt($(this).data('mile'));
+
+		addCircle(mileIndex);
+		if (mileIndex > 5) return;
+
+		curMile = parseInt($(this).data('mile')); //切换当前默认公里
+
+
+		//清空当前界面中的marker及详情页面
 		if ($('#detail_left').hasClass('visible')) {
 			$('#detail_left').transition('horizontal flip');
 		}
@@ -223,10 +244,12 @@ function bindMilesButtonEvent() {
 		if ($('#detail_right').hasClass('visible')) {
 			$('#detail_right').transition('horizontal flip');
 		}
-		//重新添加菜单
-		//initMenus();
 
-		addCircle(curMile);
+		$('.ui.cards .card:not(:eq(0))').removeClass('active');
+		//移除现有图标
+		removeMarkers("left");
+		removeMarkers("right");
+		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
 	});
 }
 
@@ -250,20 +273,20 @@ function initAreaList() {
 function bindAreaTrEvent() {
 	$('#list_left .content .list-tr').on('click', function() {
 		var index = $('#list_left .content .list-tr').index($(this));
+		if (!$(this).hasClass('active')) {
+			$(this).addClass('active').siblings().removeClass('active');
+		} else
+			$('#list_left .content .list-tr').removeClass('active');
+
 		if (index == 0) {
 			//initMenus();
 			//各个块块依次消失，显示的效果
-			$('.ui.cards .card:not(:eq(0))').transition({
-				animation: 'scale',
-				reverse: 'auto', // default setting
-				interval: 200,
-				onHide: function() {
-					//$('.ui.cards').height(0);
-				},
-				onShow: function() {
-					//$('.ui.cards').css("height", "auto");
-				}
-			});
+			if (!$('.ui.cards .card:not(:eq(0))').hasClass('visible'))
+				$('.ui.cards .card:not(:eq(0))').transition({
+					animation: 'scale',
+					reverse: 'auto', // default setting
+					interval: 200
+				});
 
 			//$('#list_left').transition('slide right');
 
@@ -283,7 +306,12 @@ function bindAreaTrEvent() {
 	$('#list_left .content .list-tr u').on('click', function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		window.open(wandaServer + '/reserve/reserveMap.html?plazaid=1000343&plazaname=上海宝山万达广场');
+
+		var mapid = $(this).data('mapid'),
+			mapname = $(this).data('mapname');
+		if (!mapid) return;
+
+		window.open(wandaServer + '/reserve/reserveMap.html?plazaid=' + mapid + '&plazaname=' + mapname);
 	});
 }
 
@@ -312,8 +340,7 @@ function inputEvent(result, $eles, $ele, index, id) {
 		});
 		$ele.empty().append(tableThreeHTML);
 
-        clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
-        clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
+		clickThreeTable($ele.find('.threeTableClass'), filterData, id);
 	});
 }
 
@@ -322,7 +349,6 @@ function inputEvent(result, $eles, $ele, index, id) {
 function clickOneTable(result, $eles, $ele, id) {
 	$eles.click(function() {
 		pausePanel($('#info'), 'fade'); //隐藏详细列表面板
-
 		$(this).addClass('active').siblings().removeClass('active');
 		var index = $(this).index();
 		//重新渲染
@@ -331,27 +357,30 @@ function clickOneTable(result, $eles, $ele, id) {
 		var tableThreeHTML = Mustache.render(template, result.one_table[index]);
 		$ele.empty().append(tableThreeHTML);
 		//调用方法
-		clickThreeTable($('#detail_left .three_table .content .threeTableClass'), result, index, id);
-		clickThreeTable($('#detail_right .three_table .content .threeTableClass'), result, index, id);
+		clickThreeTable($('#detail_left .three_table .content .threeTableClass'), getThreeTableItems(result, index), id);
+		clickThreeTable($('#detail_right .three_table .content .threeTableClass'), getThreeTableItems(result, index), id);
 
 		inputEvent(result, $('#detail_left .three_table input'), $('#three_table'), index);
 		inputEvent(result, $('#detail_right .three_table input'), $('#right_three_table'), index);
 
 		//移除上次的marker
 		//removeMarkers(curBannerIndex);
-		addMarkers(id, result.one_table[index].list); //添加本次的marker
+		addMarkers((id - 1), result.one_table[index].list); //添加本次的marker
 	});
 }
 
 //点击第三个表格分类每行事件
-function clickThreeTable(ele, result, index, id) {
+function clickThreeTable(ele, result, id) {
 	ele.click(function() {
+
+		$(this).addClass('active').siblings().removeClass('active');
+
 		var index1 = $(this).index(),
-			lon = parseFloat(result.one_table[index].list[index1].lon),
-			lat = parseFloat(result.one_table[index].list[index1].lat);
-		highlightOneMarker(result.one_table[index].list[index1]);
+			lon = parseFloat(result[index1].lon),
+			lat = parseFloat(result[index1].lat);
+		highlightOneMarker(result[index1]);
 		flyToPoint(lon, lat);
-		showInfoWin(result.one_table[index].list[index1]);
+		showInfoWin(result[index1]);
 		clickSwitch(id);
 	});
 }
@@ -412,4 +441,10 @@ function clickCity(result) {
 		$('#city #city_four .content_detail div:eq(4) span:eq(1)').html(result.list[index].info[0].ertong);*/
 		$('#city #city_five .content_detail div span:eq(1)').html(result.list[index].remains);
 	});
+}
+
+function scrollIntoView(element, container) {
+	container.scrollTop(
+		element.offset().top - container.offset().top + container.scrollTop()
+	);
 }

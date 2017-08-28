@@ -1,13 +1,13 @@
 (function(exports) {
 
-    var viewer, scene;
+    var viewer, scene, config_;
 
-    function init(container) {
+    function init(container, config) {
         // create a cesium viewer
         viewer = new Cesium.Viewer('cesiumContainer', {
             shadows: false,
             //是否创建动画小器件，左下角仪表 
-            animation: false,
+            animation: true,
             //是否显示图层选择器 
             baseLayerPicker: false,
             //是否显示全屏按钮 
@@ -23,7 +23,7 @@
             //是否显示选取指示器组件 
             selectionIndicator: false,
             //是否显示时间轴 
-            timeline: false,
+            timeline: true,
             //是否显示右上角的帮助按钮 
             navigationHelpButton: false,
             //如果设置为true，则所有几何图形以3D模式绘制以节约GPU资源 
@@ -38,7 +38,7 @@
         });
 
         // set time
-        viewer.clock.currentTime = new Cesium.JulianDate(2457990, 65810.20864916773);
+        viewer.clock.currentTime = new Cesium.JulianDate(2457990, 65897.38600916773);
 
         scene = viewer.scene;
 
@@ -86,6 +86,8 @@
         var entity = loadModel('wujiao', -115);
 
         var entity1 = loadModel('jiangqiao', 3.1);
+
+        config_ = config;
     }
 
     function getNextTileIndex(index) {
@@ -161,6 +163,10 @@
                 uri: qiu.models[name].url,
                 // minimumPixelSize : 128,
                 // maximumScale : 20000
+            },
+            picked: function(model) {
+                var name = model.name;
+                window.open(config_.server + '/reserve/reserveMap.html?plazaid=' + qiu.models[name].mapID + '&plazaname=' + qiu.models[name].mapName);
             }
         });
 
@@ -263,10 +269,15 @@
         return circle;
     }
 
+    function gviewer() {
+        return viewer;
+    }
+
     exports.init = init;
     exports.flyTo = flyTo;
     exports.addCircle = addCircle;
     exports.addMarker = addMarker;
     exports.removeMarker = removeMarker;
+    exports.view = gviewer;
 
 })((this.qiu = this.qiu || {}));

@@ -28,23 +28,32 @@ function addMarkers(type, items) {
 		var info = {},
 			lon = parseFloat(items[i].lon),
 			lat = parseFloat(items[i].lat);
+		info.data = items[i];
+		info.itemIndex = i;
+		info.cardIndex = type; //左侧卡片的index
+
+		var dirType = type < 6 ? 'left' : 'right';
+		info.dirType = dirType; //方向
+
 		var marker = qiu.addMarker({
-			name: items[i].name,
+			name: dirType + ',' + i,
 			url: getMarkerIcon(type),
 			coord: getMarkerCoord(lon, lat), // 坐标文件在 ./js/data.js 中定义
-			height: 120, // marker 的高度
+			height: 2, // marker 的高度
 			markerWidth: 20,
 			markerHeight: 20,
 			picked: function(marker) { // 点击Marker的回调方法
-				//qiu.removeMarker(marker);// 删除 marker
-				//console.log('点击了: ', marker.name, ' 并删除了它.');
+				var names = marker.name.split(',');
+				if (names && names.length == 2) {
+					var index = parseInt(names[1]);
+					$('#detail_' + names[0] + ' .three_table .content .threeTableClass').eq(index).trigger('click');
+					scrollIntoView($('#detail_' + names[0] + ' .three_table .content .threeTableClass').eq(index), $('#detail_' + names[0] + ' .three_table .content'));
+				}
+
 			}
 		});
 
 		info.marker = marker;
-		info.data = items[i];
-
-		var dirType = type < 6 ? 'left' : 'right';
 
 		curHighLightMarkers[dirType].push(info);
 	}
@@ -133,7 +142,7 @@ function highlightOneMarker(item) {
 		name: item.name,
 		url: 'images/marker/pop.png',
 		coord: getMarkerCoord(lon, lat), // 坐标文件在 ./js/data.js 中定义
-		height: 135, // marker 的高度
+		height: 10, // marker 的高度
 		markerWidth: 36,
 		markerHeight: 36,
 		picked: function(marker) { // 点击Marker的回调方法

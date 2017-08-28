@@ -23,7 +23,7 @@ function getTableThree() {
 
 /*城市列表表格*/
 function getAreaTable() {
-	var tableArea = '{{#list}}<div class="list-tr" data-lon={{lon}} data-lat={{lat}}>' + '<span>{{name}}</span>' + '<span><u>室内地图</u></span>' + '</div>{{/list}}';
+	var tableArea = '{{#list}}<div class="list-tr" data-lon={{lon}} data-lat={{lat}}>' + '<span>{{name}}</span>' + '<span><u data-mapid={{mapid}} data-mapname={{mapname}}>室内地图</u></span>' + '</div>{{/list}}';
 	return tableArea;
 }
 /*'<div>' + '<span>名称</span>' + '<span>操作</span>' + '</div>' +*/

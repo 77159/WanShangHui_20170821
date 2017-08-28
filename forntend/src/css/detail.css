@@ -137,8 +137,12 @@
 .show_detail .three_table .content{
     padding: 1px;
 }
+
 .show_detail .three_table .content div{
     line-height: 36px;
+}
+.show_detail .three_table .content .active{
+    background: #323946;
 }
 .show_detail .three_table .content div{
     border-bottom: 1px solid #A4A8B2;
@@ -173,7 +177,7 @@
     position: absolute;
     display: none;
     left: 545px;
-    top: 460px;
+    /*top: 410px;*/
     height: 400px;
     right: 235px;
     border-radius: 5px;
@@ -185,7 +189,7 @@
     position: absolute;
     display: none;
     right: 545px;
-    top: 460px;
+    /*top: 410px;*/
     height: 400px;
     left: 235px;
     border-radius: 5px;
