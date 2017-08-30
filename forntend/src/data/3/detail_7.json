@@ -1,13 +1,6 @@
 {
   "one_table": [
     {
-      "id": "1",
-      "number": "5",
-      "percentage": "10",
-      "class": "甲级5A",
-      "list": []
-    },
-    {
       "id": "2",
       "number": "20",
       "percentage": "43",

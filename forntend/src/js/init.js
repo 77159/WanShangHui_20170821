@@ -290,9 +290,11 @@ function bindAreaTrEvent() {
 
 			//$('#list_left').transition('slide right');
 
-			var lon = $(this).data('lon'),
-				lat = $(this).data('lat');
-			flyToPoint(parseFloat(lon), parseFloat(lat));
+			// var lon = $(this).data('lon'),
+			// 	lat = $(this).data('lat');
+			// flyToPoint(parseFloat(lon), parseFloat(lat));
+
+			flyToBaoShan();
 
 			addCircle(curMile);
 		} else if (index == 1) {

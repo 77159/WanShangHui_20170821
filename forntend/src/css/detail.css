@@ -1,7 +1,7 @@
 .show_detail{
     position: absolute;
     left: 235px;
-    top: 25px;
+    top: 40px;
 }
 #detail_right {
     left: auto;
@@ -176,41 +176,47 @@
 .static_detail_left{
     position: absolute;
     display: none;
-    left: 545px;
-    /*top: 410px;*/
     height: 400px;
-    right: 235px;
+    left: 535px;
+    right: 255px;
     border-radius: 5px;
     overflow-y: auto;
     background: #485164;
     border: 1px solid #fff;
+    padding-left: 40px;
+    padding-top: 20px;
 }
 .static_detail_right{
     position: absolute;
     display: none;
-    right: 545px;
-    /*top: 410px;*/
     height: 400px;
-    left: 235px;
+    right: 535px;
+    left: 245px;
     border-radius: 5px;
     overflow-y: auto;
     background: #485164;
     border: 1px solid #fff;
+    padding-left: 40px;
+    padding-top: 20px;
 }
 
 .static_detail_left .echarts_view{
     display: inline-block;
-    width: 335px;
+    width: 530px;
     height: 360px;
-    margin: 1.54%;
     background: #b4d95c;
+}
+.static_detail_left .echarts_view:nth-of-type(1){
+    margin-right: 15px;
 }
 .static_detail_right .echarts_view{
     display: inline-block;
-    width: 335px;
+    width: 530px;
     height: 360px;
-    margin: 1.54%;
     background: #b4d95c;
+}
+.static_detail_right .echarts_view:nth-of-type(1){
+    margin-right: 15px;
 }
 /*广场分类的单独样式*/
 #list_left .three_table .content div span:nth-of-type(1){

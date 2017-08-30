@@ -7,9 +7,9 @@
         viewer = new Cesium.Viewer('cesiumContainer', {
             shadows: false,
             //是否创建动画小器件，左下角仪表 
-            animation: true,
+            animation: false,
             //是否显示图层选择器 
-            baseLayerPicker: false,
+            baseLayerPicker: true,
             //是否显示全屏按钮 
             fullscreenButton: false,
             //是否显示geocoder小器件，右上角查询按钮 
@@ -23,7 +23,7 @@
             //是否显示选取指示器组件 
             selectionIndicator: false,
             //是否显示时间轴 
-            timeline: true,
+            timeline: false,
             //是否显示右上角的帮助按钮 
             navigationHelpButton: false,
             //如果设置为true，则所有几何图形以3D模式绘制以节约GPU资源 
@@ -38,7 +38,7 @@
         });
 
         // set time
-        viewer.clock.currentTime = new Cesium.JulianDate(2457990, 65897.38600916773);
+        viewer.clock.currentTime = new Cesium.JulianDate(2457994, 46382.26206518011);
 
         scene = viewer.scene;
 

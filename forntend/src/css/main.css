@@ -119,12 +119,12 @@ body {
 }
 
 #leftBanner {
-    top: 25px;
+    top: 40px;
     left: 15px;
 }
 
 #rightBanner {
-    top: 25px;
+    top: 40px;
     right: 15px;
 }
 
@@ -216,4 +216,8 @@ body {
 
 #cesiumContainer .cesium-viewer .cesium-viewer-bottom .cesium-widget-credits {
     display: none;
+}
+#cesiumContainer .cesium-viewer-toolbar {
+    top:2px;
+    right:15px;
 }

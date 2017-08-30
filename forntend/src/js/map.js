@@ -115,6 +115,10 @@ function flyToJiangQiao() {
 	qiu.flyTo(qiu.coords.jiangqiao);
 }
 
+function flyToBaoShan() {
+	qiu.flyTo(qiu.coords.wujiao);
+}
+
 //添加圆圈
 function addCircle(rad) {
 	//先清除之前的marker
